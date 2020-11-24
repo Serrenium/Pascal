@@ -1,0 +1,30 @@
+function THttpConnect.JSONObjectByLongString(aObject: TStringList): TJSONObject;
+var vJArray  : TJSONArray;
+    vJObject : TJSONObject;
+    vJValue  : TJSONValue;
+    vObjectBytes : TBytes;
+begin
+  Result := nil;
+
+  if NOT Assigned(aObject) then Exit;
+  if NOT Length(aObject.text) > 0 then Exit;
+
+  vObjectBytes := TEncoding.UTF8.GetBytes(aObject.Text);
+
+  try
+    vJValue := TJSONObject.ParseJSONValue(vObjectBytes, 0);
+    Result := vJValue as TJSONObject;
+  except
+  end;
+
+  if vJValue <> nil then    // ERP-4696
+  try
+    vJArray := vJValue as TJSONArray;
+    if vJArray <> nil then
+    begin
+      vJObject := TJSONObject.Create;
+      Result := vJObject.AddPair('Array', vJArray);
+    end
+  except
+  end;
+end;
