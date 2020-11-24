@@ -23,7 +23,7 @@ begin
   except
   end;
 
-  if vJValue <> nil then    // ERP-4696
+  if vJValue <> nil then    
   try
     vJArray := vJValue as TJSONArray;
     if vJArray <> nil then
