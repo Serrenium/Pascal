@@ -1,4 +1,4 @@
-function THttpConnect.JSONObjectByLongString(aObject: TStringList): TJSONObject;
+function JSONObjectByLongString(aObject: TStringList): TJSONObject;
 var vJArray  : TJSONArray;
     vJObject : TJSONObject;
     vJValue  : TJSONValue;
